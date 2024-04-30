@@ -1,14 +1,23 @@
 import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet,} from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Text, View} from '../components/atoms/Themed';
+import { useCounterStore } from '../service/cartStore';
+
+import Button from '../components/atoms/Button';
 
 export default function NotFoundScreen() {
+
+  const { count, increment, minus } = useCounterStore()
+
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
       <View style={styles.container}>
-        <Text style={styles.title}>This screen doesn't exist.</Text>
+
+        <Button title="increment" onPress={increment}/>
+        <Button title="minus" onPress={minus}/>
+        <Text style={styles.title}>This screen doesn't exist. {count}</Text>
 
         <Link href="/" style={styles.link}>
           <Text style={styles.linkText}>Go to home screen!</Text>
